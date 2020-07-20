@@ -17,7 +17,24 @@ namespace Keepr.Services
     {
       return _repo.Get();
     }
-    internal Keep Get(int id)
+    internal Keep Get(int id, string userId)
+    {
+      Keep foundKeep = Get(id);
+      if (foundKeep == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      if (foundKeep.IsPrivate == true && foundKeep.UserId == userId)
+      {
+        return foundKeep;
+      }
+      else if (foundKeep.IsPrivate == false)
+      {
+        return foundKeep;
+      }
+      throw new Exception("wow");
+    }
+    private Keep Get(int id)
     {
       Keep foundKeep = _repo.GetById(id);
       if (foundKeep == null)
@@ -48,9 +65,11 @@ namespace Keepr.Services
 
     }
 
+
+
     internal string Delete(int id, string userId)
     {
-      Keep foundKeep = Get(id);
+      Keep foundKeep = Get(id, userId);
       if (foundKeep.UserId != userId)
       {
         throw new Exception("This is not your keep!");

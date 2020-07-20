@@ -20,6 +20,7 @@ export default new Vuex.Store({
     },
   },
   actions: {
+    //#region Keeps
     async getKeeps({ commit, dispatch }) {
       try {
         let res = await api.get("keeps");
@@ -56,6 +57,14 @@ export default new Vuex.Store({
       try {
         let res = await api.delete("keeps/" + keepId);
         router.push({ name: "home" });
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    //#endregion Keeps
+    async getVaults({ commit, dispatch }) {
+      try {
+        let res = await api.get("vaults");
       } catch (error) {
         console.error(error);
       }

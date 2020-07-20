@@ -23,10 +23,18 @@ namespace Keepr.Repositories
     internal Keep GetById(int id)
     {
       string sql = @"
-     SELECT * FROM keeps WHERE id = @id 
-     AND isPrivate = 0;";
+     SELECT * FROM keeps WHERE id = @id";
       return _db.QueryFirstOrDefault<Keep>(sql, new { id });
     }
+
+    internal Keep GetPrivate(int id, string userId)
+    {
+      string sql = @"
+      SELECT * FROM keeps WHERE id = @id
+      AND userId = @userId;";
+      return _db.QueryFirstOrDefault<Keep>(sql, new { id, userId });
+    }
+
     internal Keep Create(Keep KeepData)
     {
       string sql = @"
