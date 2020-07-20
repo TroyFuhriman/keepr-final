@@ -47,7 +47,7 @@ namespace Keepr.Repositories
       return KeepData;
     }
 
-    internal Keep EditAll(Keep keepToUpdate)
+    internal Keep EditAll(Keep original)
     {
       string sql = @"
       UPDATE keeps
@@ -59,8 +59,8 @@ namespace Keepr.Repositories
         views = @Views,
         shares = @Shares,
         keeps = @Keeps
-      WHERE id = @Id";
-      return _db.QueryFirstOrDefault<Keep>(sql, keepToUpdate);
+      WHERE id = @Id and userId = @UserId";
+      return _db.QueryFirstOrDefault<Keep>(sql, original);
     }
 
     internal Keep Edit(Keep original)
@@ -68,7 +68,6 @@ namespace Keepr.Repositories
       string sql = @"
       UPDATE keeps
       SET
-            isPrivate = @IsPrivate,
             views = @Views,
             shares = @Shares,
             keeps = @keeps

@@ -55,13 +55,25 @@ namespace Keepr.Services
       Keep original = Get(keepToUpdate.Id);
       if (keepToUpdate.UserId == original.UserId)
       {
-        return _repo.EditAll(keepToUpdate);
+        original.Name = keepToUpdate.Name.Length > 0 ? keepToUpdate.Name : original.Name;
+        original.Description = keepToUpdate.Description.Length > 0 ? keepToUpdate.Description : original.Description;
+        original.IsPrivate = keepToUpdate.IsPrivate;
+        original.Keeps = keepToUpdate.Keeps > 0 ? keepToUpdate.Keeps : original.Keeps;
+        original.Shares = keepToUpdate.Shares > 0 ? keepToUpdate.Shares : original.Shares;
+        original.Views = keepToUpdate.Views > 0 ? keepToUpdate.Views : original.Views;
+        return _repo.EditAll(original);
       }
-      original.IsPrivate = keepToUpdate.IsPrivate;
-      original.Keeps = keepToUpdate.Keeps > 0 ? keepToUpdate.Keeps : original.Keeps;
-      original.Shares = keepToUpdate.Shares > 0 ? keepToUpdate.Keeps : original.Keeps;
-      original.Views = keepToUpdate.Views > 0 ? keepToUpdate.Keeps : original.Keeps;
-      return _repo.Edit(original);
+      else
+      {
+        if (keepToUpdate.Name.Length > 0)
+        {
+          throw new Exception("you can't change the name");
+        }
+        original.Keeps = keepToUpdate.Keeps > 0 ? keepToUpdate.Keeps : original.Keeps;
+        original.Shares = keepToUpdate.Shares > 0 ? keepToUpdate.Shares : original.Shares;
+        original.Views = keepToUpdate.Views > 0 ? keepToUpdate.Views : original.Views;
+        return _repo.Edit(original);
+      }
 
     }
 

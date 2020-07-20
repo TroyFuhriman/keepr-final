@@ -1,5 +1,5 @@
 <template>
-  <div class="keeps col-md-3 col-6">
+  <div @click="$router.push" class="keeps col-md-3 col-6">
     <div
       class="size d-flex justify-content-around rounded-top align-items-end mt-3"
       @mouseover="hover = true"

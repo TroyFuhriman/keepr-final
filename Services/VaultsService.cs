@@ -12,11 +12,20 @@ namespace keepr.Services
     {
       _repo = repo;
     }
-    internal IEnumerable<Vault> Get()
+    internal IEnumerable<Vault> Get(string userId)
     {
-      return _repo.Get();
+      return _repo.Get(userId);
     }
 
+    internal Vault Get(int id, string userId)
+    {
+      Vault foundVault = _repo.GetById(id, userId);
+      if (foundVault == null)
+      {
+        throw new Exception("Invalid Id");
+      }
+      return foundVault;
+    }
     internal Vault Get(int id)
     {
       Vault foundVault = _repo.GetById(id);
