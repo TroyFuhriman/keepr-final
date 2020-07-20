@@ -43,6 +43,7 @@ export default {
   min-width: 100%;
   min-height: 20em;
   background-size: cover;
+  background-position: center;
 }
 .bad {
   display: flex;

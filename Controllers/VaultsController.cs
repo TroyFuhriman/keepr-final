@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Claims;
 using keepr.Models;
 using keepr.Services;
+using Keepr.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
@@ -46,9 +47,9 @@ namespace keepr.Controllers
         return BadRequest(e.Message);
       }
     }
-    [HttpGet("{id}/keeps")]
+    [HttpGet("{vaultId}/keeps")]
     [Authorize]
-    public ActionResult<IEnumerable<VaultKeep>> GetKeepsByVaultId(int vaultId)
+    public ActionResult<IEnumerable<VaultKeepViewModel>> GetKeepsByVaultId(int vaultId)
     {
       try
       {

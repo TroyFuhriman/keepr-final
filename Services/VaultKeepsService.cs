@@ -20,10 +20,10 @@ namespace keepr.Services
 
     internal VaultKeep Create(VaultKeep newVaultKeep)
     {
-      if (_repo.hasRelationship(newVaultKeep))
-      {
-        throw new Exception("you already have that in your vault");
-      }
+      // if (_repo.hasRelationship(newVaultKeep))
+      // {
+      //   throw new Exception("you already have that in your vault");
+      // }
       return _repo.Create(newVaultKeep);
     }
     private VaultKeep GetById(int id)
@@ -49,7 +49,7 @@ namespace keepr.Services
       throw new Exception("something bad happened");
     }
 
-    internal IEnumerable<VaultKeep> GetKeepsByVaultId(int vaultId, string userId)
+    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId, string userId)
     {
       return _repo.GetKeepsByVaultId(vaultId, userId);
     }

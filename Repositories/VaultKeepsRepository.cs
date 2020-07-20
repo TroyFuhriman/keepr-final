@@ -16,7 +16,7 @@ namespace keepr.Repositories
     }
     internal VaultKeep GetById(int id)
     {
-      string sql = "SELECT * FROM vaulkeeps WHERE id = @id";
+      string sql = "SELECT * FROM vaultkeeps WHERE id = @id";
       return _db.QueryFirstOrDefault<VaultKeep>(sql, new { id });
     }
     internal IEnumerable<VaultKeepViewModel> GetByUserId(string userId)
@@ -48,7 +48,7 @@ namespace keepr.Repositories
       return newVaultKeep;
     }
 
-    internal IEnumerable<VaultKeep> GetKeepsByVaultId(int vaultId, string userId)
+    internal IEnumerable<VaultKeepViewModel> GetKeepsByVaultId(int vaultId, string userId)
     {
       string sql = @"
       SELECT 
@@ -57,7 +57,7 @@ namespace keepr.Repositories
         FROM vaultkeeps vk
         INNER JOIN keeps k ON k.id = vk.keepId 
         WHERE (vaultId = @vaultId AND vk.userId = @userId) ";
-      return _db.Query<VaultKeep>(sql, new { vaultId, userId });
+      return _db.Query<VaultKeepViewModel>(sql, new { vaultId, userId });
     }
 
     internal bool Delete(int id, string userId)
