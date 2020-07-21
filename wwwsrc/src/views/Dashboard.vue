@@ -1,13 +1,18 @@
 <template>
   <div class="dashboard container-fluid">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-12 text-center">
         <h1>Welcome To Your Dashboard {{$auth.user.nickname}}</h1>
         <button
-          v-if="!form"
+          v-if="!form && !vaultForm"
           @click="form = !form"
-          class="btn btn-success btn-outline-dark"
+          class="btn btn-success btn-outline-dark mr-2 mb-2"
         >Add new Keep</button>
+        <button
+          v-if="!vaultForm && !form"
+          @click="vaultForm = !vaultForm"
+          class="btn btn-success btn-outline-dark mb-2"
+        >Add new Vault</button>
         <span v-if="form">
           <button @click="form=!form" class="btn btn-danger btn-outline-dark rounded mb-3">cancel</button>
           <div class="row justify-content-center">
@@ -47,12 +52,47 @@
           </div>
         </span>
       </div>
+      <div v-if="vaultForm" class="col-12 text-center">
+        <button
+          @click="vaultForm=!vaultForm"
+          class="btn btn-danger btn-outline-dark rounded mb-3"
+        >cancel</button>
+        <input class="form-control" v-model="newVault.name" placeholder="Name" type="text" />
+        <input
+          class="form-control mt-1"
+          v-model="newVault.description"
+          placeholder="Description"
+          type="text"
+        />
+        <div class="row justify-content-center">
+          <button
+            @click="createVault"
+            class="btn btn-success btn-outline-dark text-center mt-2"
+          >Create</button>
+        </div>
+      </div>
+      <div class="col-6">
+        <h3 class="text-center border-bottom border-dark">My Vaults</h3>
+      </div>
+      <div class="col-12">
+        <div class="row">
+          <Vaults v-for="vault in vaults" :key="vault.id" :vault="vault" />
+        </div>
+      </div>
+    </div>
+    <div class="row justify-content-center">
+      <div class="col-6 border-bottom border-dark text-center">
+        <h3>My Keeps</h3>
+      </div>
+    </div>
+    <div class="row">
       <keeps v-for="keep in keeps" :key="keep.id" :keep="keep" />
     </div>
   </div>
 </template>
 
 <script>
+import Vaults from "../components/VaultsComponent";
 import keeps from "../components/KeepsComponent";
 export default {
   data() {
@@ -61,21 +101,27 @@ export default {
         userEmail: this.$auth.user.email,
         isPrivate: false
       },
-      show: false,
-      form: true
+      newVault: {},
+      form: false,
+      vaultForm: false
     };
   },
   components: {
-    keeps
+    keeps,
+    Vaults
   },
   mounted() {
     this.$store.dispatch("getKeeps");
+    this.$store.dispatch("getVaults");
   },
   computed: {
     keeps() {
       return this.$store.state.publicKeeps.filter(
         k => k.userEmail == this.$auth.user.email
       );
+    },
+    vaults() {
+      return this.$store.state.vaults;
     }
   },
   methods: {
@@ -85,6 +131,10 @@ export default {
         userEmail: this.$auth.user.email,
         isPrivate: false
       };
+    },
+    createVault() {
+      this.$store.dispatch("postVault", { ...this.newVault });
+      this.newVault = {};
     }
   }
 };

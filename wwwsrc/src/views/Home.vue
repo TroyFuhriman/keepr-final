@@ -1,6 +1,6 @@
 <template>
   <div class="home container-fluid">
-    <div class="row">
+    <div class="row justify-content-center">
       <div class="col-12 text-center">
         <h1 v-if="$auth.user">Welcome {{$auth.user.nickname}}</h1>
         <span v-if="!$auth.user">
@@ -8,7 +8,13 @@
           <p>sign-up/log-in to save Keeps in your Vault!</p>
         </span>
       </div>
-      <keeps v-for="keep in keeps" :key="keep.id" :keep="keep" />
+
+      <div class="col-4">
+        <input v-model="search" placeholder="Search..." class="form-control" type="text" />
+      </div>
+    </div>
+    <div class="row">
+      <keeps v-for="keep in filteredList" :key="keep.id" :keep="keep" />
     </div>
   </div>
 </template>
@@ -17,6 +23,11 @@
 import keeps from "../components/KeepsComponent";
 export default {
   name: "home",
+  data() {
+    return {
+      search: ""
+    };
+  },
   components: {
     keeps
   },
@@ -29,6 +40,11 @@ export default {
     },
     user() {
       return this.$store.state.user;
+    },
+    filteredList() {
+      return this.keeps.filter(keep => {
+        return keep.name.toLowerCase().includes(this.search.toLowerCase());
+      });
     }
   },
   methods: {

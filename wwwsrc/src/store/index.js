@@ -52,14 +52,15 @@ export default new Vuex.Store({
     async postKeep({ commit, dispatch }, newKeep) {
       try {
         console.log(newKeep);
-        let res = await api.post("keeps", newKeep);
+        await api.post("keeps", newKeep);
+        dispatch("getKeeps");
       } catch (error) {
         console.error(error);
       }
     },
     async editKeep({ commit, dispatch }, editKeep) {
       try {
-        let res = await api.put("keeps/" + editKeep.id, editKeep);
+        await api.put("keeps/" + editKeep.id, editKeep);
         dispatch("getKeep", editKeep.id);
       } catch (error) {
         console.error(error);
@@ -67,7 +68,7 @@ export default new Vuex.Store({
     },
     async deleteKeep({ commit, dispatch }, keepId) {
       try {
-        let res = await api.delete("keeps/" + keepId);
+        await api.delete("keeps/" + keepId);
         router.push({ name: "home" });
       } catch (error) {
         console.error(error);
@@ -110,6 +111,7 @@ export default new Vuex.Store({
       try {
         let res = await api.delete("vaults/" + vaultId);
         dispatch("getVaults");
+        router.push({ name: "dashboard" });
       } catch (error) {
         console.error(error);
       }

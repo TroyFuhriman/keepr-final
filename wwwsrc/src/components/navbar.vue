@@ -41,16 +41,6 @@
             <b>My-Dashboard</b>
           </router-link>
         </li>
-        <li class="nav-item active" v-if="$auth.isAuthenticated">
-          <router-link
-            :to="{ name: 'vaults' }"
-            data-toggle="collapse"
-            data-target=".navbar-collapse.show"
-            class="nav-link"
-          >
-            <b>Vaults</b>
-          </router-link>
-        </li>
       </ul>
       <span class="navbar-text nav-item">
         <button class="btn btn-success" @click="login" v-if="!$auth.isAuthenticated">Login</button>

@@ -4,11 +4,7 @@
       <h4 class="col-9 text-center">{{keep.name}}</h4>
       <div class="col-12">
         <div class="row justify-content-center">
-          <button
-            @click="deleteKeep"
-            v-if="$auth.user.email == keep.userEmail "
-            class="btn btn-danger mb-2"
-          >delete</button>
+          <button @click="deleteKeep" class="btn btn-danger mb-2">delete</button>
         </div>
       </div>
       <img class="col-5" :src="keep.img" alt />
@@ -38,7 +34,7 @@ export default {
   },
   methods: {
     deleteKeep() {
-      this.$store.dispatch("deleteKeep", this.$route.params.keepId);
+      this.$store.dispatch("deleteKeep", this.keep.id);
     }
   },
   components: {}

@@ -2,10 +2,12 @@
   <div id="app">
     <navbar />
     <router-view />
+    <modal />
   </div>
 </template>
 
 <script>
+import Modal from "./components/ModalComponent";
 import { setBearer } from ".//store/AxiosService";
 import { resetBearer } from ".//store/AxiosService";
 import Navbar from "@/components/navbar";
@@ -18,7 +20,8 @@ export default {
     setBearer(this.$auth.bearer);
   },
   components: {
-    Navbar
+    Navbar,
+    Modal
   }
 };
 </script>
