@@ -1,8 +1,8 @@
 <template>
-  <div class="vaults col-3 mt-3">
+  <div class="vaults col-2 mt-3">
     <div
       @click="$router.push({name: 'VaultDetails', params: {vaultId: vault.id}})"
-      class="card border-dark bg-light shadow"
+      class="action card border-dark bg-info shadow"
     >
       <img class="card-img-top" src="holder.js/100x180/" alt />
       <div class="card-body">
@@ -29,4 +29,13 @@ export default {
 
 
 <style scoped>
+.vaults {
+  opacity: 0.75;
+}
+.action {
+  cursor: pointer;
+}
+.card:hover {
+  background-color: #6dd2e2 !important;
+}
 </style>

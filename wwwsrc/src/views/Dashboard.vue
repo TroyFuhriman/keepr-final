@@ -85,8 +85,10 @@
         <h3>My Keeps</h3>
       </div>
     </div>
-    <div class="row">
-      <keeps v-for="keep in keeps" :key="keep.id" :keep="keep" />
+    <div class="row mt-2">
+      <div class="card-columns">
+        <keeps v-for="keep in keeps" :key="keep.id" :keep="keep" />
+      </div>
     </div>
   </div>
 </template>
@@ -197,7 +199,9 @@ input:checked + .slider:before {
 .slider.round {
   border-radius: 34px;
 }
-
+.card-columns {
+  column-count: 6;
+}
 .slider.round:before {
   border-radius: 50%;
 }

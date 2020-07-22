@@ -26,7 +26,7 @@
         <div class="col-12">
           <div class="row justify-content-center">
             <button
-              v-if="!form"
+              v-if="!form && !$auth.user"
               @click="deleteKeep"
               class="btn btn-danger btn-outline-dark mb-2"
             >delete</button>

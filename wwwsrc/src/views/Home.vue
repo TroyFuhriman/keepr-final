@@ -10,11 +10,13 @@
       </div>
 
       <div class="col-4">
-        <input v-model="search" placeholder="Search..." class="form-control" type="text" />
+        <input v-model="search" placeholder="Search..." class="form-control mb-2" type="text" />
       </div>
     </div>
     <div class="row">
-      <keeps class v-for="keep in filteredList" :key="keep.id" :keep="keep" />
+      <div class="card-columns">
+        <keeps class v-for="keep in filteredList" :key="keep.id" :keep="keep" />
+      </div>
     </div>
   </div>
 </template>
@@ -54,3 +56,8 @@ export default {
   }
 };
 </script>
+<style  scoped>
+.card-columns {
+  column-count: 5;
+}
+</style>

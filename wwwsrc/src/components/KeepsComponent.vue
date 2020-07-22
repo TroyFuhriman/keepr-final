@@ -1,22 +1,20 @@
 <template>
-  <div class="col-3">
-    <div class="keeps card border-dark shadow">
-      <img
-        @mouseover="hover = true"
-        @mouseleave="hover =false"
-        @click="editKeep;$router.push({name: 'KeepDetails', params: {keepId: keep.id}})"
-        class="card-img-top"
-        :src="keep.img"
-        alt
-      />
-      <div name="fade" id="good" v-if="hover" class="text-block card-body text-center">
-        <h4 class="card-title">{{keep.name}}</h4>
-        <p class="card-text">{{keep.description}}</p>
-        <div class="card-text d-flex justify-content-around">
-          <p>Views: {{keep.views}}</p>
-          <p>Saved:{{keep.keeps}}</p>
-          <p>Shares:{{keep.shares}}</p>
-        </div>
+  <div class="keeps card border-dark shadow">
+    <img
+      @mouseover="hover = true"
+      @mouseleave="hover =false"
+      @click="editKeep;$router.push({name: 'KeepDetails', params: {keepId: keep.id}})"
+      class="card-img-top blur action"
+      :src="keep.img"
+      alt
+    />
+    <div name="fade" id="good" v-if="hover" class="text-block rounded text-center">
+      <h4 class>{{keep.name}}</h4>
+      <p class>{{keep.description}}</p>
+      <div class="d-flex justify-content-around">
+        <p>Views: {{keep.views}}</p>
+        <p>Saved:{{keep.keeps}}</p>
+        <p>Shares:{{keep.shares}}</p>
       </div>
     </div>
   </div>
@@ -67,13 +65,21 @@ export default {
 .keeps {
   position: relative;
 }
+.blur:hover {
+  filter: contrast(75%);
+}
+
 .text-block {
   position: absolute;
-  bottom: 20px;
-  right: 20px;
-  background-color: black;
-  color: white;
-  padding-left: 20px;
-  padding-right: 20px;
+  bottom: 5px;
+  right: 5px;
+  background-color: white;
+  color: black;
+  opacity: 0.75;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+.action {
+  cursor: pointer;
 }
 </style>
