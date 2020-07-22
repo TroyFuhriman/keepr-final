@@ -14,7 +14,7 @@
       </div>
     </div>
     <div class="row">
-      <keeps v-for="keep in filteredList" :key="keep.id" :keep="keep" />
+      <keeps class v-for="keep in filteredList" :key="keep.id" :keep="keep" />
     </div>
   </div>
 </template>

@@ -61,7 +61,14 @@ export default new Vuex.Store({
     async editKeep({ commit, dispatch }, editKeep) {
       try {
         await api.put("keeps/" + editKeep.id, editKeep);
-        dispatch("getKeep", editKeep.id);
+      } catch (error) {
+        console.error(error);
+      }
+    },
+    async editKeepViews({ commit, dispatch }, editKeep) {
+      try {
+        await api.put("keeps/" + editKeep.id, editKeep);
+        dispatch("getKeeps", editKeep.id);
       } catch (error) {
         console.error(error);
       }
@@ -75,6 +82,7 @@ export default new Vuex.Store({
       }
     },
     //#endregion Keeps
+    //#region Vaults
     async getVaults({ commit, dispatch }) {
       try {
         let res = await api.get("vaults");
@@ -123,6 +131,14 @@ export default new Vuex.Store({
       } catch (error) {
         console.error(error);
       }
+    },
+    //#endregion Vaults
+    async postKeeptoVault({ commit, dispatch }, relationship) {
+      let res = await api.post("vaultkeeps", relationship);
+    },
+    async removeFromKeep({ commit, dispatch }, keep) {
+      let res = await api.delete("vaultkeeps/" + keep.vaultKeepId);
+      dispatch("GetKeepsByVaultId", keep.vaultId);
     },
   },
 });

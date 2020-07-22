@@ -8,7 +8,7 @@
       </div>
     </div>
     <div class="row">
-      <keeps v-for="keep in myKeeps" :key="keep.id" :keep="keep" />
+      <keeps v-for="keep in myKeeps" :key="keep.id" :keep="keep" keep.vaultId="vault.id" />
       <div class="col-12">
         <p
           class="text-center"
@@ -21,7 +21,7 @@
 
 
 <script>
-import Keeps from "../components/KeepsComponent";
+import Keeps from "../components/KeepsInVaultComponent";
 export default {
   name: "vault-details",
   data() {

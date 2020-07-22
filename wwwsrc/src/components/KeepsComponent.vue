@@ -1,26 +1,26 @@
 <template>
-  <div class="keeps col-md-3 col-6">
-    <div
-      class="size d-flex justify-content-around rounded align-items-end mt-3 shadow border border-dark"
-      @mouseover="hover = true"
-      @mouseleave="hover = false"
-      @click=" views(); $router.push({name: 'KeepDetails', params: {keepId: keep.id}})"
-      :style="{backgroundImage: 'url(' + keep.img + ')'}"
-    >
-      <p v-if="hover" class="bg-light p-2 rounded">Views:{{keep.views}}</p>
-      <p
-        type="button"
-        v-if="hover"
-        @click.stop="addToVault"
-        class="bg-light p-2 rounded dropdown"
-      >Saved:{{keep.keeps}}</p>
-      <p v-if="hover" class="bg-light p-2 rounded">Shares:{{keep.shares}}</p>
+  <div class="col-3">
+    <div class="keeps card border-dark shadow">
+      <img
+        @mouseover="hover = true"
+        @mouseleave="hover =false"
+        @click="editKeep;$router.push({name: 'KeepDetails', params: {keepId: keep.id}})"
+        class="card-img-top"
+        :src="keep.img"
+        alt
+      />
+      <div name="fade" id="good" v-if="hover" class="text-block card-body text-center">
+        <h4 class="card-title">{{keep.name}}</h4>
+        <p class="card-text">{{keep.description}}</p>
+        <div class="card-text d-flex justify-content-around">
+          <p>Views: {{keep.views}}</p>
+          <p>Saved:{{keep.keeps}}</p>
+          <p>Shares:{{keep.shares}}</p>
+        </div>
+      </div>
     </div>
-    <div class="text-center rounded-bottom">{{keep.name}}</div>
   </div>
 </template>
-
-
 <script>
 import Modal from "../components/ModalComponent";
 export default {
@@ -30,17 +30,14 @@ export default {
       hover: false
     };
   },
-  computed: {},
-  methods: {
-    views() {
-      this.keep.views++;
-      console.log(this.keep.views);
-      this.$store.dispatch("editKeep", this.keep);
-    },
-    addToVault() {
-      $("#addToVault").modal("toggle");
+  mounted() {},
+  computed: {
+    editKeep() {
+      this.keep.views = this.keep.views + 1;
+      this.$store.dispatch("editKeepViews", this.keep);
     }
   },
+  methods: {},
   components: {
     Modal
   },
@@ -59,5 +56,24 @@ export default {
 .bad {
   display: flex;
   align-items: flex-end;
+}
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.5s;
+}
+.fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+  opacity: 0;
+}
+.keeps {
+  position: relative;
+}
+.text-block {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  background-color: black;
+  color: white;
+  padding-left: 20px;
+  padding-right: 20px;
 }
 </style>
