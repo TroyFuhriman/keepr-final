@@ -4,7 +4,11 @@
       <div class="col text-center">
         <h3 class>Welcome to your {{vault.name}} Vault</h3>
         <p>{{vault.description}}</p>
-        <button @click="deleteVault" class="btn btn-danger btn-outline-dark">Delete</button>
+        <button
+          v-if="$auth.user"
+          @click="deleteVault"
+          class="btn btn-danger btn-outline-dark"
+        >Delete</button>
       </div>
     </div>
     <div class="row">
@@ -37,16 +41,16 @@ export default {
     },
     vault() {
       return this.$store.state.activeVault;
-    }
+    },
   },
   methods: {
     deleteVault() {
       this.$store.dispatch("deleteVault", this.vault.id);
-    }
+    },
   },
   components: {
-    Keeps
-  }
+    Keeps,
+  },
 };
 </script>
 
