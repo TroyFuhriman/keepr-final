@@ -22,9 +22,7 @@ namespace Keepr.Repositories
     }
     internal Keep GetById(int id)
     {
-      //NOTE need to fix getbyId to update views
       string sql = @"
-      UPDATE keeps
      SELECT * FROM keeps WHERE id = @id";
       return _db.QueryFirstOrDefault<Keep>(sql, new { id });
     }
