@@ -1,10 +1,21 @@
 <template>
   <div class="keep-details container-fluid">
     <div class="row justify-content-center">
-      <h4 @click="form=!form" v-if="!form" class="col-9 text-center">{{keep.name}}</h4>
+      <h4 @click="form = !form" v-if="!form" class="col-9 text-center">
+        {{ keep.name }}
+      </h4>
       <div class="col-3 text-center mt-2" v-if="form">
-        <input v-model="keep.name" class="form-control text-center" type="text" />
-        <button @click="editKeepName" class="btn btn-warning my-2 btn-outline-dark">edit</button>
+        <input
+          v-model="keep.name"
+          class="form-control text-center"
+          type="text"
+        />
+        <button
+          @click="editKeepName"
+          class="btn btn-warning my-2 btn-outline-dark"
+        >
+          edit
+        </button>
       </div>
       <div class="col-12">
         <div class="row justify-content-center">
@@ -13,34 +24,53 @@
       </div>
       <div class="col-9 text-center">
         <button
+          v-if="$auth.isAuthenticated"
           data-toggle="modal"
           data-target="#addToVault"
           class="btn btn-success btn-outline-dark mt-2 mb-2"
-        >Save</button>
+        >
+          Save
+        </button>
         <button
           @click="share"
           data-toggle="modal"
           data-target="#share"
           class="btn ml-2 btn-warning btn-outline-dark mt-2 mb-2"
-        >Share</button>
+        >
+          Share
+        </button>
         <div class="col-12">
           <div class="row justify-content-center">
             <button
-              v-if="!form && !$auth.user"
+              v-if="!form && $auth.user"
               @click="deleteKeep"
               class="btn btn-danger btn-outline-dark mb-2"
-            >delete</button>
+            >
+              delete
+            </button>
           </div>
         </div>
-        <p @click="dForm=!dForm" v-if="!dForm">{{keep.description}}</p>
+        <p @click="dForm = !dForm" v-if="!dForm">{{ keep.description }}</p>
         <div class="row justify-content-center">
           <span class="col-4 text-center mt-2" v-if="dForm">
-            <input v-model="keep.description" class="form-control text-center" type="text" />
-            <button @click="editKeepDescription" class="btn btn-warning my-2 btn-outline-dark">edit</button>
+            <input
+              v-model="keep.description"
+              class="form-control text-center"
+              type="text"
+            />
+            <button
+              @click="editKeepDescription"
+              class="btn btn-warning my-2 btn-outline-dark"
+            >
+              edit
+            </button>
           </span>
         </div>
-        <p>Posted by: {{keep.userEmail}}</p>
-        <p>Views: {{keep.views}} Keeps: {{keep.keeps}} Shares: {{keep.shares}}</p>
+        <p>Posted by: {{ keep.userEmail }}</p>
+        <p>
+          Views: {{ keep.views }} Keeps: {{ keep.keeps }} Shares:
+          {{ keep.shares }}
+        </p>
       </div>
     </div>
   </div>
@@ -53,7 +83,7 @@ export default {
   data() {
     return {
       form: false,
-      dForm: false
+      dForm: false,
     };
   },
   mounted() {
@@ -63,7 +93,7 @@ export default {
   computed: {
     keep() {
       return this.$store.state.activeKeep;
-    }
+    },
   },
   methods: {
     share() {
@@ -80,9 +110,9 @@ export default {
     editKeepDescription() {
       this.dForm = false;
       this.$store.dispatch("editKeep", this.keep);
-    }
+    },
   },
-  components: {}
+  components: {},
 };
 </script>
 
