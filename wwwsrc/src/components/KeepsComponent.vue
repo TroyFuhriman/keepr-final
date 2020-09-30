@@ -2,19 +2,26 @@
   <div class="keeps card border-dark shadow">
     <img
       @mouseover="hover = true"
-      @mouseleave="hover =false"
-      @click="editKeep;$router.push({name: 'KeepDetails', params: {keepId: keep.id}})"
+      @mouseleave="hover = false"
+      @click="
+        $router.push({ name: 'KeepDetails', params: { keepId: keep.id } })
+      "
       class="card-img-top blur action"
       :src="keep.img"
       alt
     />
-    <div name="fade" id="good" v-if="hover" class="text-block rounded text-center">
-      <h4 class>{{keep.name}}</h4>
-      <p class>{{keep.description}}</p>
+    <div
+      name="fade"
+      id="good"
+      v-if="hover"
+      class="text-block rounded text-center"
+    >
+      <h4 class>{{ keep.name }}</h4>
+      <p class>{{ keep.description }}</p>
       <div class="d-flex justify-content-around">
-        <p>Views: {{keep.views}}</p>
-        <p>Saved:{{keep.keeps}}</p>
-        <p>Shares:{{keep.shares}}</p>
+        <p>Views: {{ keep.views }}</p>
+        <p>Saved:{{ keep.keeps }}</p>
+        <p>Shares:{{ keep.shares }}</p>
       </div>
     </div>
   </div>
@@ -25,7 +32,7 @@ export default {
   name: "keeps",
   data() {
     return {
-      hover: false
+      hover: false,
     };
   },
   mounted() {},
@@ -33,13 +40,13 @@ export default {
     editKeep() {
       this.keep.views = this.keep.views + 1;
       this.$store.dispatch("editKeepViews", this.keep);
-    }
+    },
   },
   methods: {},
   components: {
-    Modal
+    Modal,
   },
-  props: ["keep"]
+  props: ["keep"],
 };
 </script>
 

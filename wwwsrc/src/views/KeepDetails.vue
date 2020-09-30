@@ -1,7 +1,14 @@
 <template>
   <div class="keep-details container-fluid">
     <div class="row justify-content-center">
-      <h4 @click="form = !form" v-if="!form" class="col-9 text-center">
+      <h4 v-if="$auth.user != keep.userEmail" class="col-9 text-center">
+        {{ keep.name }}
+      </h4>
+      <h4
+        @click="form = !form"
+        v-if="!form && $auth.user == keep.userEmail"
+        class="col-9 text-center"
+      >
         {{ keep.name }}
       </h4>
       <div class="col-3 text-center mt-2" v-if="form">
@@ -19,7 +26,7 @@
       </div>
       <div class="col-12">
         <div class="row justify-content-center">
-          <img class="col-5" :src="keep.img" alt />
+          <img class="col-3 img-fluid" :src="keep.img" alt />
         </div>
       </div>
       <div class="col-9 text-center">
@@ -50,7 +57,15 @@
             </button>
           </div>
         </div>
-        <p @click="dForm = !dForm" v-if="!dForm">{{ keep.description }}</p>
+        <p v-if="$auth.user != keep.userEmail">
+          {{ keep.description }}
+        </p>
+        <p
+          @click="dForm = !dForm"
+          v-if="!dForm && $auth.user == keep.userEmail"
+        >
+          {{ keep.description }}
+        </p>
         <div class="row justify-content-center">
           <span class="col-4 text-center mt-2" v-if="dForm">
             <input

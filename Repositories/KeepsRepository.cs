@@ -25,6 +25,7 @@ namespace Keepr.Repositories
       string sql = @"
      SELECT * FROM keeps WHERE id = @id";
       return _db.QueryFirstOrDefault<Keep>(sql, new { id });
+
     }
 
     internal Keep GetPrivate(int id, string userId)
