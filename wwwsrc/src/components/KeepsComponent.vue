@@ -38,8 +38,7 @@ export default {
   mounted() {},
   computed: {
     editKeep() {
-      this.keep.views = this.keep.views + 1;
-      this.$store.dispatch("editKeepViews", this.keep);
+      this.$store.dispatch("getKeep", this.keep.id);
     },
   },
   methods: {},

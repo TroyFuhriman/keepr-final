@@ -1,12 +1,12 @@
 <template>
   <div class="keep-details container-fluid">
     <div class="row justify-content-center">
-      <h4 v-if="$auth.user != keep.userEmail" class="col-9 text-center">
+      <h4 v-if="$auth.user.name != keep.userEmail" class="col-9 text-center">
         {{ keep.name }}
       </h4>
       <h4
         @click="form = !form"
-        v-if="!form && $auth.user == keep.userEmail"
+        v-if="!form && $auth.user.name == keep.userEmail"
         class="col-9 text-center"
       >
         {{ keep.name }}

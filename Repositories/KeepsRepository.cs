@@ -25,7 +25,15 @@ namespace Keepr.Repositories
       string sql = @"
      SELECT * FROM keeps WHERE id = @id";
       return _db.QueryFirstOrDefault<Keep>(sql, new { id });
-
+    }
+    internal Keep EditViews(int id)
+    {
+      string sql = @"
+      UPDATE keeps
+      SET
+      views = views +1
+      WHERE id = @id";
+      return _db.QueryFirstOrDefault<Keep>(sql, new { id });
     }
 
     internal Keep GetPrivate(int id, string userId)

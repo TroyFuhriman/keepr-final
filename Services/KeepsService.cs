@@ -19,6 +19,7 @@ namespace Keepr.Services
     }
     internal Keep Get(int id, string userId)
     {
+      _repo.EditViews(id);
       Keep foundKeep = Get(id);
       if (foundKeep == null)
       {
@@ -65,10 +66,6 @@ namespace Keepr.Services
       }
       else
       {
-        if (keepToUpdate.Name.Length > 0)
-        {
-          throw new Exception("you can't change the name");
-        }
         original.Keeps = keepToUpdate.Keeps > 0 ? keepToUpdate.Keeps : original.Keeps;
         original.Shares = keepToUpdate.Shares > 0 ? keepToUpdate.Shares : original.Shares;
         original.Views = keepToUpdate.Views > 0 ? keepToUpdate.Views : original.Views;
