@@ -1,5 +1,5 @@
 <template>
-  <div class="keeps card border-dark shadow">
+  <div class="keeps card border-dark shadow mt-1">
     <img
       @mouseover="hover = true"
       @mouseleave="hover = false"
@@ -14,14 +14,14 @@
       name="fade"
       id="good"
       v-if="hover"
-      class="text-block rounded text-center"
+      class="text-block rounded text-center text-truncate"
     >
-      <h4 class>{{ keep.name }}</h4>
-      <p class>{{ keep.description }}</p>
-      <div class="d-flex justify-content-around">
-        <p>Views: {{ keep.views }}</p>
-        <p>Saved:{{ keep.keeps }}</p>
-        <p>Shares:{{ keep.shares }}</p>
+      <h4 class="font-weight-bold">{{ keep.name }}</h4>
+      <p class="font-weight-light">{{ keep.description }}</p>
+      <div class="d-flex justify-content-around font-italic">
+        <p>-Views: {{ keep.views }} -</p>
+        <p>Saved: {{ keep.keeps }} -</p>
+        <p>Shares: {{ keep.shares }}</p>
       </div>
     </div>
   </div>

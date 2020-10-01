@@ -2,19 +2,30 @@
   <div class="dashboard container-fluid">
     <div class="row justify-content-center">
       <div class="col-12 text-center">
-        <h1>Welcome To Your Dashboard {{$auth.user.nickname}}</h1>
+        <h1 class="font-weight-bold">
+          Welcome To Your Dashboard {{ $auth.user.nickname }}
+        </h1>
         <button
           v-if="!form && !vaultForm"
           @click="form = !form"
           class="btn btn-success btn-outline-dark mr-2 mb-2"
-        >Add new Keep</button>
+        >
+          Add new Keep
+        </button>
         <button
           v-if="!vaultForm && !form"
           @click="vaultForm = !vaultForm"
           class="btn btn-success btn-outline-dark mb-2"
-        >Add new Vault</button>
+        >
+          Add new Vault
+        </button>
         <span v-if="form">
-          <button @click="form=!form" class="btn btn-danger btn-outline-dark rounded mb-3">cancel</button>
+          <button
+            @click="form = !form"
+            class="btn btn-danger btn-outline-dark rounded mb-3"
+          >
+            cancel
+          </button>
           <div class="row justify-content-center">
             <input
               v-model="newKeep.name"
@@ -48,27 +59,45 @@
           </label>
           <p class>Private</p>
           <div class="row justify-content-center">
-            <button @click="createKeep" class="btn btn-success mt-3 btn-outline-dark">Submit</button>
+            <button
+              @click="createKeep"
+              class="btn btn-success mt-3 btn-outline-dark"
+            >
+              Submit
+            </button>
           </div>
         </span>
       </div>
       <div v-if="vaultForm" class="col-12 text-center">
-        <button
-          @click="vaultForm=!vaultForm"
-          class="btn btn-danger btn-outline-dark rounded mb-3"
-        >cancel</button>
-        <input class="form-control" v-model="newVault.name" placeholder="Name" type="text" />
-        <input
-          class="form-control mt-1"
-          v-model="newVault.description"
-          placeholder="Description"
-          type="text"
-        />
+        <div class="row justify-content-center">
+          <div class="col-12">
+            <button
+              @click="vaultForm = !vaultForm"
+              class="btn btn-danger btn-outline-dark rounded mb-2"
+            >
+              cancel
+            </button>
+          </div>
+          <input
+            class="form-control col-7"
+            v-model="newVault.name"
+            placeholder="Name"
+            type="text"
+          />
+          <input
+            class="form-control mt-1 col-7"
+            v-model="newVault.description"
+            placeholder="Description"
+            type="text"
+          />
+        </div>
         <div class="row justify-content-center">
           <button
             @click="createVault"
             class="btn btn-success btn-outline-dark text-center mt-2"
-          >Create</button>
+          >
+            Create
+          </button>
         </div>
       </div>
       <div class="col-6">
@@ -101,16 +130,16 @@ export default {
     return {
       newKeep: {
         userEmail: this.$auth.user.email,
-        isPrivate: false
+        isPrivate: false,
       },
       newVault: {},
       form: false,
-      vaultForm: false
+      vaultForm: false,
     };
   },
   components: {
     keeps,
-    Vaults
+    Vaults,
   },
   mounted() {
     this.$store.dispatch("getKeeps");
@@ -119,26 +148,26 @@ export default {
   computed: {
     keeps() {
       return this.$store.state.publicKeeps.filter(
-        k => k.userEmail == this.$auth.user.email
+        (k) => k.userEmail == this.$auth.user.email
       );
     },
     vaults() {
       return this.$store.state.vaults;
-    }
+    },
   },
   methods: {
     createKeep() {
       this.$store.dispatch("postKeep", { ...this.newKeep });
       this.newKeep = {
         userEmail: this.$auth.user.email,
-        isPrivate: false
+        isPrivate: false,
       };
     },
     createVault() {
       this.$store.dispatch("postVault", { ...this.newVault });
       this.newVault = {};
-    }
-  }
+    },
+  },
 };
 </script>
 

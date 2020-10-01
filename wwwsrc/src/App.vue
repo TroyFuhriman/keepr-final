@@ -1,8 +1,12 @@
 <template>
   <div id="app">
     <navbar />
-    <router-view />
+    <router-view class="grow" />
     <modal />
+    <footer class="bg-dark p-2 text-light text-center">
+      Made with Love by
+      <a href="https://github.com/TroyFuhriman">Troy</a>
+    </footer>
   </div>
 </template>
 
@@ -22,8 +26,8 @@ export default {
   },
   components: {
     Navbar,
-    Modal
-  }
+    Modal,
+  },
 };
 </script>
 
@@ -31,4 +35,14 @@ export default {
 @import "bootstrap";
 // @import "./assets/_overrides.scss";
 @import "./assets/yeti.scss";
+#app {
+  font-family: "Josefin Sans", sans-serif;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.grow {
+  flex-grow: 1;
+}
 </style>
