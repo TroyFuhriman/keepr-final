@@ -1,11 +1,6 @@
 <template>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <router-link
-      class="navbar-brand"
-      data-toggle="collapse"
-      data-target=".navbar-collapse.show"
-      :to="{ name: 'home' }"
-    >
+    <router-link class="navbar-brand" :to="{ name: 'home' }">
       <b>Keepr</b>
     </router-link>
     <button
@@ -19,7 +14,7 @@
     >
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse" id="navbarText active">
+    <div class="collapse navbar-collapse active" id="navbarText">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
           <router-link
@@ -43,7 +38,13 @@
         </li>
       </ul>
       <span class="navbar-text nav-item">
-        <button class="btn btn-success" @click="login" v-if="!$auth.isAuthenticated">Login</button>
+        <button
+          class="btn btn-success"
+          @click="login"
+          v-if="!$auth.isAuthenticated"
+        >
+          Login
+        </button>
         <button class="btn btn-danger" @click="logout" v-else>logout</button>
       </span>
     </div>
@@ -56,7 +57,7 @@ import { resetBearer, setBearer } from "../store/AxiosService";
 
 let _api = axios.create({
   baseURL: "https://localhost:5001",
-  withCredentials: true
+  withCredentials: true,
 });
 export default {
   name: "Navbar",
@@ -72,8 +73,8 @@ export default {
       // this.$store.dispatch("resetBearer");
       resetBearer();
       await this.$auth.logout({ returnTo: window.location.origin });
-    }
-  }
+    },
+  },
 };
 </script>
 

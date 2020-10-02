@@ -115,7 +115,7 @@
       </div>
     </div>
     <div class="row mt-2">
-      <div class="card-columns">
+      <div class="col-12 card-columns">
         <keeps v-for="keep in keeps" :key="keep.id" :keep="keep" />
       </div>
     </div>
@@ -233,5 +233,33 @@ input:checked + .slider:before {
 }
 .slider.round:before {
   border-radius: 50%;
+}
+@media (min-width: 576px) {
+  .card-columns {
+    column-count: 2;
+  }
+}
+@media (max-width: 575px) {
+  .card-columns {
+    column-count: 1;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-columns {
+    column-count: 3;
+  }
+}
+
+@media (min-width: 992px) {
+  .card-columns {
+    column-count: 4;
+  }
+}
+
+@media (min-width: 1200px) {
+  .card-columns {
+    column-count: 5;
+  }
 }
 </style>

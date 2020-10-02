@@ -31,7 +31,7 @@
       <div class="col-12">
         <div class="row justify-content-center">
           <img
-            class="col-md-6 col-lg-4 col-sm-9 col-12 border border-dark rounded shadow p-0"
+            class="col-md-6 col-lg-4 col-sm-9 col-12 border img-fluid border-dark rounded shadow p-0"
             :src="keep.img"
             alt
           />
@@ -102,7 +102,6 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: "keep-details",
@@ -148,6 +147,4 @@ export default {
 };
 </script>
 
-
-<style scoped>
-</style>
+<style scoped></style>
