@@ -11,11 +11,7 @@
       >
         {{ keep.name }}
       </h4>
-      <p class="col-9 text-center font-weight-light">
-        Views: {{ keep.views }} Keeps: {{ keep.keeps }} Shares:
-        {{ keep.shares }}
-      </p>
-      <div class="col-md-3 col-12 col-sm-6 text-center mt-2" v-if="form">
+      <div class="col-md-4 col-12 col-sm-6 text-center mt-2" v-if="form">
         <input
           v-model="keep.name"
           class="form-control text-center"
@@ -28,13 +24,19 @@
           edit
         </button>
       </div>
+      <p class="col-9 text-center font-weight-light">
+        Views: {{ keep.views }} Keeps: {{ keep.keeps }} Shares:
+        {{ keep.shares }}
+      </p>
       <div class="col-12">
         <div class="row justify-content-center">
-          <img
-            class="col-md-6 col-lg-4 col-sm-9 col-12 border img-fluid border-dark rounded shadow p-0"
-            :src="keep.img"
-            alt
-          />
+          <div class="col-md-6 col-lg-4 col-sm-9 col-12">
+            <img
+              class="img-fluid border border-info shadow rounded"
+              :src="keep.img"
+              alt
+            />
+          </div>
         </div>
         <div class="row justify-content-center">
           <p
@@ -57,12 +59,12 @@
           </p>
         </div>
       </div>
-      <div class="col-md-9 col-12 text-center">
+      <div class="col-md-9 col-12 text-center mb-3">
         <button
           v-if="$auth.isAuthenticated"
           data-toggle="modal"
           data-target="#addToVault"
-          class="btn btn-success btn-outline-dark"
+          class="btn btn-secondary btn-outline-light border border-dark"
         >
           Save
         </button>
@@ -71,19 +73,22 @@
           @click="share"
           data-toggle="modal"
           data-target="#share"
-          class="btn ml-2 mr-2 btn-warning btn-outline-dark"
+          class="btn ml-2 mr-2 btn-secondary btn-outline-light border border-dark"
         >
           Share
         </button>
         <button
           v-if="!form && profile"
           @click="deleteKeep"
-          class="btn btn-danger btn-outline-dark"
+          class="btn btn-danger btn-outline-light border border-dark"
         >
           delete
         </button>
         <div class="row justify-content-center">
-          <span class="col-4 text-center mt-2" v-if="dForm">
+          <span
+            class="col-lg-4 col-md-6 col-sm-9 sol-12 text-center mt-2"
+            v-if="dForm"
+          >
             <input
               v-model="keep.description"
               class="form-control text-center"
@@ -121,7 +126,7 @@ export default {
     },
     profile() {
       if (this.$auth.user) {
-        return this.$auth.user.name == this.keep.userEmail;
+        return this.$auth.user.sub == this.keep.userId;
       }
       return false;
     },

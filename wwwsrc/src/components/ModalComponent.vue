@@ -82,7 +82,6 @@
   </div>
 </template>
 
-
 <script>
 export default {
   name: "vault-modal",
@@ -119,6 +118,4 @@ export default {
 };
 </script>
 
-
-<style scoped>
-</style>
+<style scoped></style>

@@ -1,8 +1,10 @@
 <template>
   <div class="home container-fluid">
     <div class="row justify-content-center">
-      <div class="col-12 text-center">
-        <h1 v-if="$auth.user">Welcome {{ $auth.user.nickname }}</h1>
+      <div class="col-12 text-center ">
+        <h1 class="text-capitalize" v-if="$auth.user">
+          Welcome {{ $auth.user.given_name || $auth.user.name }}
+        </h1>
         <span v-if="!$auth.user">
           <h1>Welcome to Keepr!</h1>
           <p>sign-up/log-in to save Keeps in your Vault!</p>
@@ -13,7 +15,7 @@
         <input
           v-model="search"
           placeholder="Search..."
-          class="form-control mb-2"
+          class="form-control mb-2 border border-info"
           type="text"
         />
       </div>
@@ -65,7 +67,7 @@ export default {
   },
 };
 </script>
-<style  scoped>
+<style scoped>
 @media (min-width: 576px) {
   .card-columns {
     column-count: 2;

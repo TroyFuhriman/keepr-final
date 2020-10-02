@@ -37,15 +37,27 @@
           </router-link>
         </li>
       </ul>
+      <img
+        v-if="$auth.user"
+        class="rounded-circle img-fluid profileImgNav mr-3 d-inline"
+        :src="$auth.user.picture"
+      />
       <span class="navbar-text nav-item">
         <button
-          class="btn btn-success"
+          class="btn btn-secondary"
           @click="login"
           v-if="!$auth.isAuthenticated"
         >
           Login
         </button>
-        <button class="btn btn-danger" @click="logout" v-else>logout</button>
+
+        <button
+          class="btn btn-danger btn-outline-light border-dark"
+          @click="logout"
+          v-else
+        >
+          logout
+        </button>
       </span>
     </div>
   </nav>
@@ -78,4 +90,9 @@ export default {
 };
 </script>
 
-<style></style>
+<style>
+.profileImgNav {
+  width: 3rem;
+  height: 3rem;
+}
+</style>

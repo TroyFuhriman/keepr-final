@@ -1,5 +1,5 @@
 <template>
-  <div class="keeps card border-dark shadow mt-1">
+  <div class="keeps card border-info border shadow mt-1">
     <img
       @mouseover="hover = true"
       @mouseleave="hover = false"
@@ -48,7 +48,6 @@ export default {
   props: ["keep"],
 };
 </script>
-
 
 <style scoped>
 .size {

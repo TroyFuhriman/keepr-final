@@ -2,29 +2,30 @@
   <div class="dashboard container-fluid">
     <div class="row justify-content-center">
       <div class="col-12 text-center">
-        <h1 class="font-weight-bold">
-          Welcome To Your Dashboard {{ $auth.user.nickname }}
+        <h1 class="font-weight-bold text-capitalize">
+          Welcome To Your Dashboard <br />
+          {{ $auth.user.nickname }}
         </h1>
         <button
           v-if="!form && !vaultForm"
           @click="form = !form"
-          class="btn btn-success btn-outline-dark mr-2 mb-2"
+          class="btn btn-secondary btn-outline-light border-dark mr-2 mb-2"
         >
           Add new Keep
         </button>
         <button
           v-if="!vaultForm && !form"
           @click="vaultForm = !vaultForm"
-          class="btn btn-success btn-outline-dark mb-2"
+          class="btn btn-secondary btn-outline-light border-dark mb-2"
         >
           Add new Vault
         </button>
         <span v-if="form">
           <button
             @click="form = !form"
-            class="btn btn-danger btn-outline-dark rounded mb-3"
+            class="btn btn-danger btn-outline-light border-dark rounded mb-3"
           >
-            cancel
+            Cancel
           </button>
           <div class="row justify-content-center">
             <input
@@ -58,10 +59,10 @@
             <span class="slider round"></span>
           </label>
           <p class>Private</p>
-          <div class="row justify-content-center">
+          <div class="row justify-content-center mb-3">
             <button
               @click="createKeep"
-              class="btn btn-success mt-3 btn-outline-dark"
+              class="btn btn-success mt-3 btn-outline-light border-dark"
             >
               Submit
             </button>
@@ -73,7 +74,7 @@
           <div class="col-12">
             <button
               @click="vaultForm = !vaultForm"
-              class="btn btn-danger btn-outline-dark rounded mb-2"
+              class="btn btn-danger btn-outline-light border-dark rounded mb-2"
             >
               cancel
             </button>
@@ -91,10 +92,10 @@
             type="text"
           />
         </div>
-        <div class="row justify-content-center">
+        <div class="row justify-content-center mb-3">
           <button
             @click="createVault"
-            class="btn btn-success btn-outline-dark text-center mt-2"
+            class="btn btn-success btn-outline-light border-dark text-center mt-2"
           >
             Create
           </button>
