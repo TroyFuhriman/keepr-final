@@ -149,7 +149,7 @@ export default {
   computed: {
     keeps() {
       return this.$store.state.publicKeeps.filter(
-        (k) => k.userEmail == this.$auth.user.email
+        (k) => k.userId == this.$auth.user.sub
       );
     },
     vaults() {

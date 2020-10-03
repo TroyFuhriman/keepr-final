@@ -2,8 +2,8 @@
   <div class="home container-fluid">
     <div class="row justify-content-center">
       <div class="col-12 text-center ">
-        <h1 class="text-capitalize" v-if="$auth.user">
-          Welcome {{ $auth.user.given_name || $auth.user.name }}
+        <h1 class="text-capitalize text-break" v-if="$auth.user">
+          Welcome {{ $auth.user.given_name || $auth.user.nickname }}
         </h1>
         <span v-if="!$auth.user">
           <h1>Welcome to Keepr!</h1>
